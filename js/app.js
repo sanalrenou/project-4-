@@ -1,6 +1,3 @@
-
-
-
 //load map 
 var map;
 var markers = [];
@@ -119,6 +116,7 @@ var initMap = function(){
           });
 		  marker.addListener('click',toggleBounce);
         }
+			 
 		
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
@@ -168,10 +166,50 @@ var initMap = function(){
         return markerImage;
       }
 	  
-	  function toggleBounce() {
+
+	   function toggleBounce() {
         if (this.getAnimation() !== null) {
           this.setAnimation(null);
         } else {
           this.setAnimation(google.maps.Animation.BOUNCE);
         }
       }
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+	var viewModel = function(){
+    var self = this;
+    this.markers = ko.observableArray([]);
+    this.query = ko.observable();
+	
+    // filters the places array when searched in a query input
+    this.searchResults = ko.computed(function() {
+        q = self.query();
+        if(!q){
+            
+            return places;
+        }
+        
+		else{    
+            return ko.utils.arrayFilter(places, function(place) {
+                if(place.name.toLowerCase().indexOf(q) >= 0) {
+                    return place;
+                }    
+            });
+        }
+    });
+
+    // when name of the location clicked displays infowindow
+    this.viewPlace = function(place){
+        var check_myLatLng = {lat:place.location.lat,
+                               lng:place.location.lng};
+              
+    };  
+    
+     
+};     
