@@ -1,3 +1,6 @@
+
+
+
 //load map 
 var map;
 var markers = [];
@@ -213,3 +216,10 @@ var initMap = function(){
     
      
 };     
+
+  
+   ko.applyBindings(viewModel);
+
+		   
+	   
+	 
