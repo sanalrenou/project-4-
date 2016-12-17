@@ -163,6 +163,12 @@ var initMap = function(){
           markers[i].setMap(null);
         }
       }
+	  function visiblemarker(){
+		  for(var i=0;i<markers.length;i++){
+			  markers[i].setMap(map);
+		  }
+	  }
+	  
 	  function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
           'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
@@ -184,7 +190,11 @@ var initMap = function(){
       }
 	  
 	  
-	  
+	  function visible(){
+		  for(var i=0;i<markers.length;i++){
+			  markers[i].setMap(map);
+		  }
+	  }
 	  
 	  
 	  
@@ -199,11 +209,12 @@ var initMap = function(){
     this.searchResults = ko.computed(function() {
         q = self.query();
         if(!q){
-           
+            visible();
             return places;
         }
         
-		else{    
+		else{ 
+			hideListings();
             return ko.utils.arrayFilter(places, function(place) {
                 if(place.name.toLowerCase().indexOf(q) >= 0) {
 					
@@ -220,7 +231,7 @@ var initMap = function(){
         var check_myLatLng = {lat:place.location.lat,
                                lng:place.location.lng};
 							   
-     
+        
     };  
     
      
