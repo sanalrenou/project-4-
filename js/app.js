@@ -231,7 +231,8 @@ var initMap = function(){
         var check_myLatLng = {lat:place.location.lat,
                                lng:place.location.lng};
 							   
-        
+       
+		
     };  
     
      
