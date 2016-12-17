@@ -115,9 +115,14 @@ var initMap = function(){
 		  
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
+			var mark =this;
             populateInfoWindow(this, largeInfowindow);
+		    toggleBounce(this);
+            setTimeout(function(){
+             mark.setAnimation(null);
+           },1000);
           });
-		  marker.addListener('click',toggleBounce);
+		  ;
         }
 			 
 	
@@ -170,11 +175,11 @@ var initMap = function(){
       }
 	  
 
-	   function toggleBounce() {
-        if (this.getAnimation() !== null) {
-          this.setAnimation(null);
+	   function toggleBounce(marker) {
+        if (marker.getAnimation() !== null) {
+          marker.setAnimation(null);
         } else {
-          this.setAnimation(google.maps.Animation.BOUNCE);
+          marker.setAnimation(google.maps.Animation.BOUNCE);
         }
       }
 	  
@@ -215,7 +220,7 @@ var initMap = function(){
         var check_myLatLng = {lat:place.location.lat,
                                lng:place.location.lng};
 							   
-              
+     
     };  
     
      
