@@ -120,7 +120,7 @@ var initMap = function(){
 		  marker.addListener('click',toggleBounce);
         }
 			 
-		
+	
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
 }
@@ -185,23 +185,26 @@ var initMap = function(){
 	  
 	  
 	  
+	  
 	var viewModel = function(){
     var self = this;
-    this.markers = ko.observableArray([]);
+    this.markersArray = ko.observableArray([]);
     this.query = ko.observable();
-	
     // filters the places array when searched in a query input
     this.searchResults = ko.computed(function() {
         q = self.query();
         if(!q){
-            
+           
             return places;
         }
         
 		else{    
             return ko.utils.arrayFilter(places, function(place) {
                 if(place.name.toLowerCase().indexOf(q) >= 0) {
+					
+					
                     return place;
+					
                 }    
             });
         }
@@ -211,6 +214,7 @@ var initMap = function(){
     this.viewPlace = function(place){
         var check_myLatLng = {lat:place.location.lat,
                                lng:place.location.lng};
+							   
               
     };  
     
@@ -218,7 +222,7 @@ var initMap = function(){
 };     
 
   
-   ko.applyBindings(viewModel);
+   ko.applyBindings(viewModel);  
 
 		   
 	   
