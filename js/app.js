@@ -238,8 +238,8 @@ var initMap = function(){
      
 };     
 
-  
-   ko.applyBindings(viewModel);  
+   var vm = new viewModel();
+	ko.applyBindings(vm);
 
 		   
 	   
