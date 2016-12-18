@@ -18,7 +18,7 @@
 			<div class="navbar">
 			<input type="text" class="search" data-bind="textInput: query" placeholder="search">
 			<ul data-bind="foreach: searchResults">
-            <li class="location_name"><a href="#" class="location_name" data-bind="text: name, click: viewPlace"></a></li>
+            <li class="location_name"><a href="#" class="location_name" data-bind="text: name, click: $parent.viewPlace"></a></li>
 			</ul> 
                  
 			</div>
