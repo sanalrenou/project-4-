@@ -229,8 +229,7 @@ var initMap = function(){
 
     // when name of the location clicked displays infowindow
     this.viewPlace = function(place){
-        var check_myLatLng = {lat:place.location.lat,
-                               lng:place.location.lng};
+        new google.maps.event.trigger(place.marker, 'click');
 							   
        
 		
