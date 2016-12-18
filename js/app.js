@@ -112,7 +112,8 @@ var initMap = function(){
           });
 		    // Push the marker to our array of markers.
           markers.push(marker);
-		  
+	  // Store the marker as a property of the place
+          places[i].marker = marker;	  
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
 			var mark =this;
@@ -218,8 +219,8 @@ var initMap = function(){
             return ko.utils.arrayFilter(places, function(place) {
                 if(place.name.toLowerCase().indexOf(q) >= 0) {
 					
-					
-                    return place;
+		place.marker.setMap(map);			
+                return place;
 					
                 }    
             });
