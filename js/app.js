@@ -111,9 +111,10 @@ var initMap = function(){
             id: i
           });
 		    // Push the marker to our array of markers.
-          markers.push(marker);
-	  // Store the marker as a property of the place
-          places[i].marker = marker;	  
+			markers.push(marker);
+			// Store the marker as a property of the place
+			places[i].marker = marker;
+		   
           // Create an onclick event to open an infowindow at each marker.
           marker.addListener('click', function() {
 			var mark =this;
@@ -197,8 +198,34 @@ var initMap = function(){
 		  }
 	  }
 	  
-	  
-	  
+	  var loaddata = function(place){
+    
+
+    var venue_id = place.venue_id;
+    var client_id = "LGHIIR3H5N4LB4X5GLRZOWCVWTP5DPAFBA4NZH02GG2BKWJE";
+    var client_secret = "KY3VVWMVCCPZLDKVVYUSWJIZ0JXNZIHVCXX3S5PCRERYMEYP";
+    var FoursquareUrl = "https://api.foursquare.com/v2/venues/"+venue_id+"?client_id="+client_id+"&client_secret="+client_secret+"&v=20130815" ;
+    
+    $.ajax({
+        url:FoursquareUrl,
+        dataType:"json",
+        async:true        
+    }).success(function(data){
+		console.log(data);
+		console.log(data.response.venue.name);
+        console.log(data.response.venue.rating);
+		var image_prefix = data.response.venue.bestPhoto.prefix;
+            var image_suffix = data.response.venue.bestPhoto.suffix;
+            console.log(image_prefix +"320x200"+ image_suffix);
+        
+     
+			
+           
+    })
+    
+};
+    
+
 	  
 	  
 	  
@@ -206,6 +233,7 @@ var initMap = function(){
     var self = this;
     this.markersArray = ko.observableArray([]);
     this.query = ko.observable();
+	
     // filters the places array when searched in a query input
     this.searchResults = ko.computed(function() {
         q = self.query();
@@ -219,8 +247,8 @@ var initMap = function(){
             return ko.utils.arrayFilter(places, function(place) {
                 if(place.name.toLowerCase().indexOf(q) >= 0) {
 					
-		place.marker.setMap(map);			
-                return place;
+					place.marker.setMap(map);
+                    return place;
 					
                 }    
             });
@@ -229,17 +257,21 @@ var initMap = function(){
 
     // when name of the location clicked displays infowindow
     this.viewPlace = function(place){
-        new google.maps.event.trigger(place.marker, 'click');
+		new google.maps.event.trigger(place.marker, 'click');
+		loaddata(place);
+	};
+	
 							   
        
 		
     };  
     
      
-};     
+     
 
-   var vm = new viewModel();
+    var vm = new viewModel();
 	ko.applyBindings(vm);
+  
 
 		   
 	   
