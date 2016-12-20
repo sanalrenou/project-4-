@@ -1,43 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>New Delhi Tourist Places</title>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css">
+	<title>New Delhi Tourist Places</title>
+	<meta content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes" name="viewport">
+	<meta charset="utf-8">
+	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-	
 	<div class="container">
-      <div class="options-box">
-        <h1>Find Your favourite places</h1>
-		 
-        <div>
-            <input id="show-listings" type="button"  value="Show Listings">
-            <input id="hide-listings" type="button"  value="Hide Listings">
-			<div class="navbar">
-			<input type="text" class="search" data-bind="textInput: query" placeholder="search">
-			<ul data-bind="foreach: searchResults">
-            <li class="location_name"><a href="#" class="location_name" data-bind="text: name, click: $parent.viewPlace"></a></li>
-			</ul> 
-                 
+		<div class="options-box">
+			<h1>Find Your favourite places</h1>
+			<div>
+				<input id="show-listings" type="button" value="Show Listings"> <input id="hide-listings" type="button" value="Hide Listings">
+				<div class="navbar">
+					<input class="search" data-bind="textInput: query" placeholder="search" type="text">
+					<ul data-bind="foreach: searchResults">
+						<li class="location_name">
+							<a class="location_name" data-bind="text: name, click: $parent.viewPlace" href="#"></a>
+						</li>
+					</ul>
+				</div>
 			</div>
-			
-	  </div> 
-	  </div>
-	<div id="map"></div>
+		</div>
+		<div id="map"></div>
 	</div>
-	
-	
-	<script src="js/knockout.js"></script>   
-    <script src="js/jquery.min.js"></script>
-	<script src="js/model.js"></script>
-    <script src="js/app.js"></script>
-	<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Kj6c-eLBPQOaDH483cw5dIdJa1BGkf0&v=3&callback=initMap">
-    </script>
-	
-	
-
+	<script src="js/knockout.js">
+	</script> 
+	<script src="js/jquery.min.js">
+	</script> 
+	<script src="js/model.js">
+	</script> 
+	<script src="js/app.js">
+	</script> 
+	<script async defer onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Kj6c-eLBPQOaDH483cw5dIdJa1BGkf0&v=3&callback=initMap">
+	</script>
 </body>
 </html>
