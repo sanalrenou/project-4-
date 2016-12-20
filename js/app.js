@@ -233,12 +233,19 @@ var loaddata = function(place) {
 
         console.log(image_prefix + "320x200" + image_suffix);
         var imag = image_prefix + "320x200" + image_suffix;
-
+		var lastinfowindow = null;
         var infowindow = new google.maps.InfoWindow();
 
         infowindow.setContent('<div>' + '<h5>' + place.name + '</h5>' + ' <p>' + place.rating + '</p>' + "<img src=" + imag + ">" + '</div>');
+		if(lastinfowindow === infowindow){
+			infowindow.close();
+			lastinfowindow = null;
+		}else{
+			infowindow.open(map, place.marker);
+			lastinfowindow = infowindow;
+		}
 
-        infowindow.open(map, place.marker);
+        
     }).fail(function(error) {
         infoWindow.setContent('<div>' + '<h3> FourSquare API could not be accessed at this time.</h3>' + '</div>');
         infoWindow.open(map);
