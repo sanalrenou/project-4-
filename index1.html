@@ -7,9 +7,14 @@
 	<link href="css/style.css" rel="stylesheet">
 </head>
 <body>
+	<div class="header">
+        <a href="#" class="option-icon header_item"><img src="img/reorder-option.svg"></a>
+        <h2 class="header_title header_item">New Delhi Tourist Places</h2>
+    </div>
+	
 	<div class="container">
 		<div class="options-box">
-			<h1>Find Your favourite places</h1>
+			<h1>New Delhi vISITS</h1>
 			<div>
 				<input id="show-listings" type="button" value="Show Listings"> <input id="hide-listings" type="button" value="Hide Listings">
 				<div class="navbar">
@@ -28,11 +33,27 @@
 	</script> 
 	<script src="js/jquery.min.js">
 	</script> 
+	<script>
+        $('.option-icon').click(function(){
+            $('.navbar').toggleClass('open');
+        });
+    </script>
 	<script src="js/model.js">
 	</script> 
 	<script src="js/app.js">
 	</script> 
 	<script async defer onerror="googleError()" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB2Kj6c-eLBPQOaDH483cw5dIdJa1BGkf0&v=3&callback=initMap">
 	</script>
+	<script>
+        $('.location_name').click(function(){
+            $('.navbar').removeClass('open');
+        });
+                  
+         $('a').click(function(){
+            $('a').removeClass('li-active');
+            $(this).addClass('li-active');
+        });
+        
+    </script>
 </body>
 </html>
