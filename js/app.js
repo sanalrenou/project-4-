@@ -83,12 +83,7 @@ var initMap = function() {
         styles: styles
 
     });
-    // The following group uses the location array to create an array of markers on initialize.
-    for (var i = 0; i < places.length; i++) {
-        // Get the position from the places array.
-        var position = places[i].location;
-        var title = places[i].name;
-    }
+    
 
     var largeInfowindow = new google.maps.InfoWindow();
     // Style the markers a bit. This will be our listing marker icon.
@@ -126,13 +121,13 @@ var initMap = function() {
             setTimeout(function() {
                 mark.setAnimation(null);
             }, 1000);
-        });;
+        });
     }
 
 
     document.getElementById('show-listings').addEventListener('click', showListings);
     document.getElementById('hide-listings').addEventListener('click', hideListings);
-}
+};
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -216,7 +211,6 @@ var loaddata = function(place) {
         dataType: "json",
         async: true
     }).success(function(data) {
-        console.log(data);
 
         place.name = data.response.venue.name;
         place.rating = data.response.venue.rating;
@@ -233,22 +227,16 @@ var loaddata = function(place) {
 
         console.log(image_prefix + "320x200" + image_suffix);
         var imag = image_prefix + "320x200" + image_suffix;
-		var lastinfowindow = null;
-        var infowindow = new google.maps.InfoWindow();
-
+	    var infowindow = new google.maps.InfoWindow();
+		
         infowindow.setContent('<div>' + '<h5>' + place.name + '</h5>' + ' <p>' + place.rating + '</p>' + "<img src=" + imag + ">" + '</div>');
-		if(lastinfowindow === infowindow){
-			infowindow.close();
-			lastinfowindow = null;
-		}else{
-			infowindow.open(map, place.marker);
-			lastinfowindow = infowindow;
-		}
+		infowindow.open(map, place.marker);
+			
+		
 
         
     }).fail(function(error) {
-        infoWindow.setContent('<div>' + '<h3> FourSquare API could not be accessed at this time.</h3>' + '</div>');
-        infoWindow.open(map);
+        alert('Failed to get FOURSQUARE api');
     });
 
 };
