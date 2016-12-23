@@ -18,9 +18,8 @@
 - Google Maps.
 - Foursquare.
 
-
-
-- Download the file and open index.html to run locally from the -[github](https://github.com/sanalrenou/project-4-)
+##How to run:
+ Download the file and open index.html to run locally from the -[github](https://github.com/sanalrenou/project-4-)
 
 
 
