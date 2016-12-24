@@ -116,7 +116,7 @@ var initMap = function() {
         // Create an onclick event to open an infowindow at each marker.
         marker.addListener('click', function() {
             var mark = this;
-            populateInfoWindow(this, largeInfowindow);
+			loaddata(mark);
             toggleBounce(this);
             setTimeout(function() {
                 mark.setAnimation(null);
@@ -124,10 +124,13 @@ var initMap = function() {
         });
     }
 
-
+	 
     document.getElementById('show-listings').addEventListener('click', showListings);
     document.getElementById('hide-listings').addEventListener('click', hideListings);
+	var vm = new viewModel();
+	ko.applyBindings(vm);
 };
+
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -191,12 +194,12 @@ function toggleBounce(marker) {
     }
 }
 
-
 function visible() {
     for (var i = 0; i < markers.length; i++) {
         markers[i].setMap(map);
     }
 }
+
 
 var loaddata = function(place) {
 
@@ -205,7 +208,7 @@ var loaddata = function(place) {
     var client_id = "LGHIIR3H5N4LB4X5GLRZOWCVWTP5DPAFBA4NZH02GG2BKWJE";
     var client_secret = "KY3VVWMVCCPZLDKVVYUSWJIZ0JXNZIHVCXX3S5PCRERYMEYP";
     var FoursquareUrl = "https://api.foursquare.com/v2/venues/" + venue_id + "?client_id=" + client_id + "&client_secret=" + client_secret + "&v=20130815";
-
+	
     $.ajax({
         url: FoursquareUrl,
         dataType: "json",
@@ -227,11 +230,17 @@ var loaddata = function(place) {
 
         console.log(image_prefix + "320x200" + image_suffix);
         var imag = image_prefix + "320x200" + image_suffix;
+		
+		
 	    var infowindow = new google.maps.InfoWindow();
+		
 		
         infowindow.setContent('<div>' + '<h5>' + place.name + '</h5>' + ' <p>' + place.rating + '</p>' + "<img src=" + imag + ">" + '</div>');
 		infowindow.open(map, place.marker);
-			
+		
+		
+		
+		
 		
 
         
@@ -248,11 +257,14 @@ function googleError() {
 
 
 
+
 var viewModel = function() {
     var self = this;
     this.markersArray = ko.observableArray([]);
     this.query = ko.observable();
-
+	markers.forEach(function(marker, i) {
+	marker.venue_id = places[i].venue_id;
+	});
     // filters the places array when searched in a query input
     this.searchResults = ko.computed(function() {
         q = self.query();
@@ -274,7 +286,7 @@ var viewModel = function() {
 
     // when name of the location clicked displays infowindow
     this.viewPlace = function(place) {
-        new google.maps.event.trigger(place.marker, 'click');
+        
         loaddata(place);
     };
 
@@ -286,5 +298,3 @@ var viewModel = function() {
 
 
 
-var vm = new viewModel();
-ko.applyBindings(vm);
